@@ -44,3 +44,6 @@ titan-*/pom.xml.versionsBackup
 /pkgcommon/
 # Emacs file backups
 *~
+examples/*
+rexhome/*
+titan-kryo/dependency-reduced-pom.xml
