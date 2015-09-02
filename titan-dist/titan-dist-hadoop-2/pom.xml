@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan-dist</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <packaging>pom</packaging>
@@ -31,7 +31,27 @@
             <artifactId>hbase-server</artifactId>
             <!-- Need the -server artifact for hbase.mapreduce.TableInputFormat (Faunus) -->
             <version>${hbase098.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>commons-configuration</groupId>
+					<artifactId>commons-configuration</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
     </dependencies>
 
     <build>

@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hbase-parent</artifactId>
@@ -16,6 +16,7 @@
         <module>titan-hbase-094</module>
         <module>titan-hbase-096</module>
         <module>titan-hbase-098</module>
+        <module>titan-hbase-10</module>
         <module>titan-hbase</module>
     </modules>
     

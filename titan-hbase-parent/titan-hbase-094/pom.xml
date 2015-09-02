@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan-hbase-parent</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hbase-094</artifactId>
@@ -66,6 +66,10 @@
             <artifactId>protobuf-java</artifactId>
             <optional>true</optional>
         </dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+		</dependency>
     </dependencies>
 
     <!-- Override Titan's managed versions for some libs where HBase 0.94
@@ -234,25 +238,23 @@
     
     <profiles>
         <profile>
+            <!-- For the HBase 0.94 releases, the HBase team only pushes Hadoop-1.x-compatible artifacts to Central.
+                 This is why we depend on the Hadoop 1 profile when building the HBase 0.94 shim.  There's a Hadoop 2
+                 profile in this pom, but you have to recompile HBase 0.94 manually (or get a Hadoop-2-compatible
+                 HBase 0.94 artifact from some non-Apache vendor) before it's any use. -->
             <id>hadoop1</id>
 
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <property>
-                    <name>hadoop.profile</name>
-                    <value>1.0</value>
+                    <name>!hadoop.profile</name>
                 </property>
             </activation>
-
-            <properties>
-                <hadoop.version>${hadoop1.version}</hadoop.version>
-            </properties>
 
             <dependencies>
                 <dependency>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-core</artifactId>
-                    <version>${hadoop.version}</version>
+                    <version>${hadoop1.version}</version>
                     <optional>true</optional>
                 </dependency>
                 <dependency>
@@ -282,17 +284,17 @@
                 <dependency>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-annotations</artifactId>
-                    <version>${hadoop.version}</version>
+                    <version>${hadoop2.version}</version>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-hdfs</artifactId>
-                    <version>${hadoop.version}</version>
+                    <version>${hadoop2.version}</version>
                 </dependency>
                 <dependency>
                     <groupId>org.apache.hadoop</groupId>
                     <artifactId>hadoop-client</artifactId>
-                    <version>${hadoop.version}</version>
+                    <version>${hadoop2.version}</version>
                 </dependency>
             </dependencies>
         </profile>

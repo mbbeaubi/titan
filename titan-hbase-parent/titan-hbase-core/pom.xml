@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan-hbase-parent</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hbase-core</artifactId>
@@ -12,7 +12,6 @@
     
     <properties>
         <hadoop.profile>2.0</hadoop.profile>
-        <hbase096.version.base>0.96.1.1</hbase096.version.base>
         <jruby.version>1.6.8</jruby.version>
         <top.level.basedir>${project.parent.parent.basedir}</top.level.basedir>
     </properties>
@@ -36,7 +35,11 @@
                     <artifactId>asm</artifactId>
                     <groupId>asm</groupId>
                 </exclusion>
-            </exclusions>
+				<exclusion>
+					<groupId>commons-configuration</groupId>
+					<artifactId>commons-configuration</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
@@ -56,8 +59,23 @@
                     <artifactId>asm</artifactId>
                     <groupId>asm</groupId>
                 </exclusion>
+				<exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <dependency>
             <artifactId>jruby-complete</artifactId>
             <groupId>org.jruby</groupId>
@@ -115,8 +133,7 @@
             </activation>
             
             <properties>
-                <hbase.version>${hbase096.version.base}-hadoop1</hbase.version>
-                <hadoop.version>${hadoop1.version}</hadoop.version>
+                <hbase.version>${hbase094.version}</hbase.version>
             </properties>
 
             <build>
@@ -131,21 +148,6 @@
                     </plugin>
                 </plugins>
             </build>
-
-            <dependencyManagement>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.hadoop</groupId>
-                        <artifactId>hadoop-core</artifactId>
-                        <version>${hadoop.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.apache.hadoop</groupId>
-                        <artifactId>hadoop-client</artifactId>
-                        <version>${hadoop.version}</version>
-                    </dependency>
-                </dependencies>
-            </dependencyManagement>
 
             <dependencies>
                 <dependency>
@@ -173,38 +175,14 @@
             <id>hadoop2</id>
 
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <property>
-                    <name>hadoop.profile</name>
-                    <value>2.0</value>
+                    <name>!hadoop.profile</name>
                 </property>
             </activation>
 
             <properties>
-                <hbase.version>${hbase096.version.base}-hadoop2</hbase.version>
-                <hadoop.version>${hadoop2.version}</hadoop.version>
+                <hbase.version>${hbase100.version}</hbase.version>
             </properties>
-
-            <dependencies>
-                <dependency>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-annotations</artifactId>
-                    <version>${hadoop.version}</version>
-                    <optional>true</optional>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-hdfs</artifactId>
-                    <version>${hadoop.version}</version>
-                    <optional>true</optional>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.hadoop</groupId>
-                    <artifactId>hadoop-client</artifactId>
-                    <version>${hadoop.version}</version>
-                    <optional>true</optional>
-                </dependency>
-            </dependencies>
         </profile>
     </profiles>
 </project>

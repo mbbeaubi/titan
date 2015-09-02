@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan-hadoop-parent</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hadoop-2</artifactId>
@@ -19,6 +19,12 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop2.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -54,12 +60,30 @@
             <optional>true</optional>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+			<optional>true</optional>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>${hbase098.version}</version>
             <optional>true</optional>
             <scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-configuration</groupId>
+					<artifactId>commons-configuration</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

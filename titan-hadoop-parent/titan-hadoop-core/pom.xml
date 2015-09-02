@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan-hadoop-parent</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hadoop-core</artifactId>
@@ -20,6 +20,12 @@
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop2.version}</version>
             <optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.mrunit</groupId>
@@ -55,16 +61,40 @@
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-server</artifactId>
-            <version>${hbase098.version}</version>
+            <version>${hbase100.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+			<optional>true</optional>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
-            <version>${hbase098.version}</version>
+            <version>${hbase100.version}</version>
             <optional>true</optional>
             <scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-configuration</groupId>
+					<artifactId>commons-configuration</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
     </dependencies>
 

@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.thinkaurelius.titan</groupId>
         <artifactId>titan</artifactId>
-        <version>0.5.3.Infa-SNAPSHOT</version>
+        <version>0.5.3.Infa2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>titan-hadoop-parent</artifactId>
@@ -51,6 +51,12 @@
             <groupId>com.tinkerpop.blueprints</groupId>
             <artifactId>blueprints-core</artifactId>
             <version>${tinkerpop.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-configuration</groupId>
+					<artifactId>commons-configuration</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
         <dependency>
             <groupId>com.tinkerpop.blueprints</groupId>

@@ -1,22 +1,29 @@
 package com.thinkaurelius.titan.diskstorage.common;
 
-import com.google.common.base.Preconditions;
-import com.thinkaurelius.titan.core.attribute.Duration;
-import com.thinkaurelius.titan.diskstorage.BackendException;
-import com.thinkaurelius.titan.diskstorage.PermanentBackendException;
-import com.thinkaurelius.titan.diskstorage.util.time.StandardTimepoint;
-import com.thinkaurelius.titan.diskstorage.util.time.Timepoint;
-import com.thinkaurelius.titan.diskstorage.util.time.TimestampProvider;
-import com.thinkaurelius.titan.diskstorage.configuration.Configuration;
-import com.thinkaurelius.titan.diskstorage.keycolumnvalue.StoreTransaction;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.AUTH_PASSWORD;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.AUTH_USERNAME;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.CONNECTION_TIMEOUT;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.PAGE_SIZE;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.STORAGE_HOSTS;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.STORAGE_PORT;
+import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.TIMESTAMP_PROVIDER;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Preconditions;
+import com.thinkaurelius.titan.core.attribute.Duration;
+import com.thinkaurelius.titan.diskstorage.BackendException;
+import com.thinkaurelius.titan.diskstorage.PermanentBackendException;
+import com.thinkaurelius.titan.diskstorage.configuration.Configuration;
+import com.thinkaurelius.titan.diskstorage.keycolumnvalue.StoreTransaction;
+import com.thinkaurelius.titan.diskstorage.util.time.StandardTimepoint;
+import com.thinkaurelius.titan.diskstorage.util.time.Timepoint;
+import com.thinkaurelius.titan.diskstorage.util.time.TimestampProvider;
+import com.thinkaurelius.titan.diskstorage.util.time.Timestamps;
 
 /**
  * Abstract class that handles configuration options shared by all distributed storage backends
