@@ -91,6 +91,7 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                     </plugin>
 
+					<!--
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
@@ -103,12 +104,13 @@
                                 </goals>
                                 <configuration>
                                     <fromFile>${project.build.directory}/${project.version}.zip</fromFile>
-                                    <serverId>aurelius.s3</serverId> <!-- your ~/.m2/settings.xml must match -->
+                                    <serverId>aurelius.s3</serverId> - your ~/.m2/settings.xml must match -
                                     <url>s3://titan-release-compat-test/bdb-es/</url>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
+					-->
 
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>

@@ -124,13 +124,15 @@
 
     <build>
         <!-- Used during release:perform to upload to S3 -->
-        <extensions>
+        <!--
+		<extensions>
             <extension>
                 <groupId>org.kuali.maven.wagons</groupId>
                 <artifactId>maven-s3-wagon</artifactId>
                 <version>${kuali.s3.wagon.version}</version>
             </extension>
         </extensions>
+		-->
 
         <plugins>
             <!--
@@ -580,6 +582,7 @@
 
             <build>
                 <plugins>
+				<!--
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>wagon-maven-plugin</artifactId>
@@ -593,12 +596,13 @@
                                 </goals>
                                 <configuration>
                                     <fromDir>${htmlchunk.output.dir}</fromDir>
-                                    <serverId>aurelius.s3</serverId> <!-- your ~/.m2/settings.xml must match -->
+                                    <serverId>aurelius.s3</serverId> - your ~/.m2/settings.xml must match -
                                     <url>s3://s3.thinkaurelius.com/docs/titan/${project.version}</url>
                                 </configuration>
                             </execution>
                         </executions>
                     </plugin>
+					-->
                 </plugins>
             </build>
         </profile>
@@ -746,6 +750,7 @@
                             </executions>
                         </plugin>
 
+						<!--
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>wagon-maven-plugin</artifactId>
@@ -759,12 +764,13 @@
                                     <configuration>
                                         <fromDir>${project.build.directory}</fromDir>
                                         <includes>titan*.tar.bz2.asc,titan*.zip.asc,titan*.zip,titan*.tar.bz2</includes>
-                                        <serverId>aurelius.s3</serverId> <!-- your ~/.m2/settings.xml must match -->
+                                        <serverId>aurelius.s3</serverId> <!- your ~/.m2/settings.xml must match ->
                                         <url>s3://s3.thinkaurelius.com/downloads/titan/</url>
                                     </configuration>
                                 </execution>
                             </executions>
                         </plugin>
+						-->
 
                         <plugin>
                             <artifactId>maven-jar-plugin</artifactId>
