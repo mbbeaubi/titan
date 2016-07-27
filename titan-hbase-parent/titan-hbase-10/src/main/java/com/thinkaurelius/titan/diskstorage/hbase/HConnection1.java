@@ -6,12 +6,12 @@ import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 
-public class HConnection1_0 implements ConnectionMask
+public class HConnection1 implements ConnectionMask
 {
 
     private final Connection cnx;
 
-    public HConnection1_0(Connection cnx)
+    public HConnection1(Connection cnx)
     {
         this.cnx = cnx;
     }
@@ -19,7 +19,7 @@ public class HConnection1_0 implements ConnectionMask
     @Override
     public TableMask getTable(String name) throws IOException
     {
-        return new HTable1_0(cnx.getTable(TableName.valueOf(name)));
+        return new HTable1(cnx.getTable(TableName.valueOf(name)));
     }
 
     @Override

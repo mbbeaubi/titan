@@ -8,10 +8,9 @@ import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Delete;
-import org.apache.hadoop.hbase.client.HConnectionManager;
 import org.apache.hadoop.hbase.io.compress.Compression;
 
-public class HBaseCompat1_0 implements HBaseCompat {
+public class HBaseCompat1 implements HBaseCompat {
 
     @Override
     public void setCompression(HColumnDescriptor cd, String algo) {
@@ -27,7 +26,7 @@ public class HBaseCompat1_0 implements HBaseCompat {
     @Override
     public ConnectionMask createConnection(Configuration conf) throws IOException
     {
-        return new HConnection1_0(ConnectionFactory.createConnection(conf));
+        return new HConnection1(ConnectionFactory.createConnection(conf));
     }
 
     @Override
