@@ -1,20 +1,15 @@
 package com.thinkaurelius.titan.hadoop.formats.hbase;
 
-import com.thinkaurelius.titan.diskstorage.Backend;
-import com.thinkaurelius.titan.diskstorage.keycolumnvalue.SliceQuery;
-import com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration;
-import com.thinkaurelius.titan.hadoop.FaunusVertex;
-import com.thinkaurelius.titan.hadoop.formats.util.TitanInputFormat;
-import com.thinkaurelius.titan.diskstorage.hbase.HBaseStoreManager;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.List;
 
-import com.thinkaurelius.titan.hadoop.formats.util.input.TitanHadoopSetupCommon;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.filter.Filter;
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat;
 import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
-import org.apache.hadoop.hbase.mapreduce.TableRecordReader;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.InputSplit;
@@ -24,9 +19,13 @@ import org.apache.hadoop.mapreduce.TaskAttemptContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
+import com.thinkaurelius.titan.diskstorage.Backend;
+import com.thinkaurelius.titan.diskstorage.hbase.HBaseStoreManager;
+import com.thinkaurelius.titan.diskstorage.keycolumnvalue.SliceQuery;
+import com.thinkaurelius.titan.graphdb.configuration.GraphDatabaseConfiguration;
+import com.thinkaurelius.titan.hadoop.FaunusVertex;
+import com.thinkaurelius.titan.hadoop.formats.util.TitanInputFormat;
+import com.thinkaurelius.titan.hadoop.formats.util.input.TitanHadoopSetupCommon;
 
 /**
  * @author Marko A. Rodriguez (http://markorodriguez.com)
@@ -46,7 +45,7 @@ public class TitanHBaseInputFormat extends TitanInputFormat {
 
     @Override
     public RecordReader<NullWritable, FaunusVertex> createRecordReader(final InputSplit inputSplit, final TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
-        return new TitanHBaseRecordReader(this, this.vertexQuery, (TableRecordReader) this.tableInputFormat.createRecordReader(inputSplit, taskAttemptContext), edgestoreFamily);
+        return new TitanHBaseRecordReader(this, this.vertexQuery, this.tableInputFormat.createRecordReader(inputSplit, taskAttemptContext), edgestoreFamily);
     }
 
     @Override
