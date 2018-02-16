@@ -26,7 +26,7 @@ public class HBaseCompat0_96 implements HBaseCompat {
     @Override
     public ConnectionMask createConnection(Configuration conf) throws IOException
     {
-        return new HConnection0_96(HConnectionManager.createConnection(conf));
+        return new HConnection0_96(HConnectionManager.createConnection(conf), conf);
     }
 
     @Override

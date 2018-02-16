@@ -2,6 +2,7 @@ package com.thinkaurelius.titan.diskstorage.hbase;
 
 import java.io.IOException;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HConnection;
 
@@ -9,22 +10,24 @@ public class HConnection0_96 implements ConnectionMask
 {
 
     private final HConnection cnx;
+    private final Configuration hconf;
 
-    public HConnection0_96(HConnection cnx)
+    public HConnection0_96(HConnection cnx, Configuration hconf)
     {
         this.cnx = cnx;
+        this.hconf = hconf;
     }
 
     @Override
     public TableMask getTable(String name) throws IOException
     {
-        return new HTable0_96(cnx.getTable(name));
+        return new HTable0_96(cnx.getTable(name), hconf);
     }
 
     @Override
     public AdminMask getAdmin() throws IOException
     {
-        return new HBaseAdmin0_96(new HBaseAdmin(cnx));
+    	return new HBaseAdmin0_96(new HBaseAdmin(cnx));
     }
 
     @Override

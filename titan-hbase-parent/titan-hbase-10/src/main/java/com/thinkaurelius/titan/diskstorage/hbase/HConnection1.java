@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Connection;
-import org.apache.hadoop.hbase.client.HBaseAdmin;
 
 public class HConnection1 implements ConnectionMask
 {
@@ -19,13 +18,13 @@ public class HConnection1 implements ConnectionMask
     @Override
     public TableMask getTable(String name) throws IOException
     {
-        return new HTable1(cnx.getTable(TableName.valueOf(name)));
+        return new HTable1(this.cnx, cnx.getTable(TableName.valueOf(name)));
     }
 
     @Override
     public AdminMask getAdmin() throws IOException
     {
-        return new HBaseAdmin1(new HBaseAdmin(cnx));
+        return new HBaseAdmin1(cnx.getAdmin());
     }
 
     @Override

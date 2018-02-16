@@ -553,14 +553,16 @@ public class HBaseStoreManager extends DistributedStoreManager implements KeyCol
 
         List<KeyRange> result = new LinkedList<KeyRange>();
 
-        HTable table = null;
+        TableMask table = null;
+        CloseableTreeMap<HRegionInfo, ServerName> map = null;
         try {
             ensureTableExists(tableName, getCfNameForStoreName(GraphDatabaseConfiguration.SYSTEM_PROPERTIES_STORE_NAME), 0);
 
-            table = new HTable(hconf, tableName);
+            table = cnx.getTable(tableName);
 
+            map = table.getRegionLocations();
             Map<KeyRange, ServerName> normed =
-                    normalizeKeyBounds(table.getRegionLocations());
+                    normalizeKeyBounds(map);
 
             for (Map.Entry<KeyRange, ServerName> e : normed.entrySet()) {
                 if (NetworkUtil.isLocalConnection(e.getValue().getHostname())) {
@@ -577,6 +579,7 @@ public class HBaseStoreManager extends DistributedStoreManager implements KeyCol
         } catch (IOException e) {
             logger.warn("Unexpected IOException", e);
         } finally {
+        	IOUtils.closeQuietly(map);
             IOUtils.closeQuietly(table);
         }
         return result;

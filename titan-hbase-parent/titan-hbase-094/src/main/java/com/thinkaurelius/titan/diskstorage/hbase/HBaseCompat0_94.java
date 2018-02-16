@@ -11,7 +11,7 @@ import org.apache.hadoop.hbase.io.hfile.Compression;
 
 public class HBaseCompat0_94 implements HBaseCompat {
 
-    @Override
+	@Override
     public void setCompression(HColumnDescriptor cd, String algo) {
         cd.setCompressionType(Compression.Algorithm.valueOf(algo));
     }
@@ -24,7 +24,7 @@ public class HBaseCompat0_94 implements HBaseCompat {
     @Override
     public ConnectionMask createConnection(Configuration conf) throws IOException
     {
-        return new HConnection0_94(HConnectionManager.createConnection(conf));
+        return new HConnection0_94(HConnectionManager.createConnection(conf), conf);
     }
 
     @Override

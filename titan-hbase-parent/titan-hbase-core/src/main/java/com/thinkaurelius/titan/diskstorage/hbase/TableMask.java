@@ -9,6 +9,8 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.hadoop.hbase.HRegionInfo;
+import org.apache.hadoop.hbase.ServerName;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
@@ -27,5 +29,7 @@ public interface TableMask extends Closeable
     Result[] get(List<Get> gets) throws IOException;
 
     void batch(List<Row> writes, Object[] results) throws IOException, InterruptedException;
+    
+    CloseableTreeMap<HRegionInfo, ServerName> getRegionLocations() throws IOException;
 
 }
